@@ -8,6 +8,7 @@
   "dependencyDashboard": true,
   "osvVulnerabilityAlerts": true,
   "minimumReleaseAge": "1 day",
+  "rangeStrategy": "pin",
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true
