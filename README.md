@@ -21,6 +21,13 @@ specific to it:
 - **`config:recommended`** — Renovate's own baseline.
 - **`helpers:pinGitHubActionDigests`** — action refs are pinned to commit
   digests and kept current, so a moved tag cannot change what CI runs.
+- **`rangeStrategy: "pin"`** — the same idea for everything else. Manifests
+  record exact versions rather than ranges, so what resolves is what is
+  written down, and Renovate raises it rather than a silent re-resolution.
+  Note the consequence for a package published with runtime dependencies: an
+  exact version in a published manifest forces itself on consumers. Only
+  `calc-mcp` is in that position today; if that becomes a problem, the
+  carve-out belongs in its own `renovate.json`, not here.
 - **Automerge on green**, with a one-day minimum release age. Required status
   checks are the gate: an update that breaks a repository turns them red and
   the merge stops there.
