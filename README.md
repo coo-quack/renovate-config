@@ -44,12 +44,23 @@ specific to it:
 ## Changing it
 
 A change here reaches every repository in the org on Renovate's next run, which
-is why the repo takes pull requests rather than pushes. Validate before opening
-one:
+is why the repo takes pull requests rather than pushes. CI validates every one:
 
 ```bash
-npx --package renovate renovate-config-validator default.json
+npx --package renovate renovate-config-validator --strict --no-global default.json
 ```
+
+`--no-global` reads the file as a shared preset rather than as self-hosted
+global configuration, which is what the other repos actually extend.
+`--strict` fails on warnings and on a needed config migration, not only on
+hard errors — migration warnings are what went unnoticed across five
+repositories before this preset existed.
+
+The validator checks shape, not judgement. It accepts a rule that is valid
+and wrong: `rangeStrategy: "pin"` applied to `engines` produced
+`"node": "v26.5.0"` in a published manifest and passed validation. Read what
+Renovate's first run after a change actually proposes, in every repository,
+before letting automerge have it.
 
 ## Why it exists
 

@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # A mistake in default.json reaches every repository in the org on Renovate's
+  # next run, and Renovate reports it as a warning on each of them rather than
+  # failing anywhere. Catch it here instead.
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+
+      # --no-global reads the file as a shared preset rather than as
+      # self-hosted global configuration, which is what the other repos
+      # actually extend. --strict fails on warnings and on a needed config
+      # migration, not just on hard errors — the migration warnings are what
+      # went unnoticed across five repos before this preset existed.
+      - name: Validate the preset
+        run: npx --yes --package renovate renovate-config-validator --strict --no-global default.json
