@@ -28,6 +28,12 @@ specific to it:
   exact version in a published manifest forces itself on consumers. Only
   `calc-mcp` is in that position today; if that becomes a problem, the
   carve-out belongs in its own `renovate.json`, not here.
+- **Override targets never take a major.** An entry in `pnpm-workspace.yaml`
+  exists to lift a transitive package out of an advisory window while staying
+  inside what its parent declared. A major takes it outside that. Renovate
+  raised a `fast-uri` override from 3.1.4 to 4.1.1 and automerged it, while
+  the `ajv` that pulls it declared `^3.0.1` — and its newest release still
+  does. Majors here need dashboard approval instead.
 - **Constraints are exempt from that pinning.** `engines`,
   `peerDependencies` and `required_version` state the range a package
   supports rather than a version it depends on, so they keep their range
