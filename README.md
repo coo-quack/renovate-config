@@ -6,6 +6,10 @@ Renovate manages.
 
 ## Using it
 
+This repository extends the preset too. It holds a CI workflow whose actions
+are digest-pinned like everyone else's, and a policy repository that sits
+outside its own policy is not one.
+
 A repository's own `renovate.json` should be this, plus anything genuinely
 specific to it:
 
