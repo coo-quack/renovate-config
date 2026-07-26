@@ -20,6 +20,13 @@
       "rangeStrategy": "auto"
     },
     {
+      "description": "No major bumps for override targets. An override exists to lift a transitive package out of an advisory window while staying inside what its parent declared; a major takes it outside that, substituting a version the parent never asked for. Renovate raised talkative-lobster's fast-uri override from 3.1.4 to 4.1.1 and automerged it, while ajv declared ^3.0.1 and its newest release still does. When only a major would fix something, the parent needs upgrading, and that is a decision rather than a bump.",
+      "matchFileNames": ["pnpm-workspace.yaml"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "dependencyDashboardApproval": true
+    },
+    {
       "description": "Automerge everything once CI passes. Required checks are the gate; a release that breaks a repo turns them red and the merge stops there.",
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "automerge": true,
