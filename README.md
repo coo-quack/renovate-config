@@ -28,6 +28,12 @@ specific to it:
   exact version in a published manifest forces itself on consumers. Only
   `calc-mcp` is in that position today; if that becomes a problem, the
   carve-out belongs in its own `renovate.json`, not here.
+- **Constraints are exempt from that pinning.** `engines`,
+  `peerDependencies` and `required_version` state the range a package
+  supports rather than a version it depends on, so they keep their range
+  operator. Pinning them narrows what can install the package: the first
+  attempt rewrote `"node": ">=22.22.3"` to `"node": "v26.5.0"` in a published
+  manifest, and `"openclaw": ">=2026.6.0"` to a single release.
 - **Automerge on green**, with a one-day minimum release age. Required status
   checks are the gate: an update that breaks a repository turns them red and
   the merge stops there.

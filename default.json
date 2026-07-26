@@ -15,6 +15,11 @@
   },
   "packageRules": [
     {
+      "description": "Never pin a constraint. engines, peerDependencies and required_version state the range a package supports, not a version it depends on. Rewriting one to an exact version narrows what can install the package, and in a published manifest it forces that version on every consumer.",
+      "matchDepTypes": ["engines", "peerDependencies", "required_version"],
+      "rangeStrategy": "auto"
+    },
+    {
       "description": "Automerge everything once CI passes. Required checks are the gate; a release that breaks a repo turns them red and the merge stops there.",
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "automerge": true,
