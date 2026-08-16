@@ -15,6 +15,11 @@
   },
   "packageRules": [
     {
+      "description": "Stable releases only. ignoreUnstable stops protecting a package once its current version is itself unstable: Renovate then follows the prerelease channel, so a repo that adopted an alpha (sensitive-canary's vitepress 2.0.0-alpha) keeps receiving alphas. Excluding hyphenated versions leaves exactly the stable channel, because an npm version containing a hyphen is always a prerelease. Scoped to the npm datasource; in other ecosystems a hyphen appears in stable versions too (Docker tags like 1.2-alpine), so the same regex would block legitimate updates there.",
+      "matchDatasources": ["npm"],
+      "allowedVersions": "!/-/"
+    },
+    {
       "description": "Never pin a constraint. engines, peerDependencies and required_version state the range a package supports, not a version it depends on. Rewriting one to an exact version narrows what can install the package, and in a published manifest it forces that version on every consumer.",
       "matchDepTypes": ["engines", "peerDependencies", "required_version"],
       "rangeStrategy": "auto"
