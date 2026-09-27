@@ -20,8 +20,8 @@
       "allowedVersions": "!/-/"
     },
     {
-      "description": "Never pin a constraint. engines, peerDependencies and required_version state the range a package supports, not a version it depends on. Rewriting one to an exact version narrows what can install the package, and in a published manifest it forces that version on every consumer.",
-      "matchDepTypes": ["engines", "peerDependencies", "required_version"],
+      "description": "Never pin a constraint. engines, peerDependencies, required_version and Python's requires-python state the range a package supports, not a version it depends on. Rewriting one to an exact version narrows what can install the package, and in a published manifest it forces that version on every consumer.",
+      "matchDepTypes": ["engines", "peerDependencies", "required_version", "requires-python"],
       "rangeStrategy": "auto"
     },
     {
