@@ -23,6 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      # Node stays inside the range renovate's engines declare (^24.11.0 for
+      # renovate 44), and renovate.json holds Renovate to it. On a newer Node,
+      # npx does not fail: npm installs the newest renovate whose engines still
+      # match, an old major (37.x on Node 26), and its validator stops with
+      # "File does not exist".
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24.22.2'
@@ -32,5 +37,7 @@ jobs:
       # actually extend. --strict fails on warnings and on a needed config
       # migration, not just on hard errors — the migration warnings are what
       # went unnoticed across five repos before this preset existed.
+      # The version is pinned so a run's result does not depend on the day;
+      # renovate.json updates it.
       - name: Validate the preset
-        run: npx --yes --package renovate renovate-config-validator --strict --no-global default.json
+        run: npx --yes --package renovate@44.202.1 renovate-config-validator --strict --no-global default.json

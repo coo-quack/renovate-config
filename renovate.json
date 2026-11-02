@@ -1,4 +1,26 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>coo-quack/renovate-config"]
+  "extends": ["github>coo-quack/renovate-config"],
+  "customManagers": [
+    {
+      "description": "The renovate version CI's validator step installs with npx.",
+      "customType": "regex",
+      "managerFilePatterns": ["/^\\.github/workflows/ci\\.yml$/"],
+      "matchStrings": ["--package renovate@(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "renovate",
+      "datasourceTemplate": "npm"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "CI's Node stays inside the range renovate's engines declare (^24.11.0 for renovate 44). On a newer Node, npx installs an old renovate major whose validator fails, as the Node 26 update did. Raise this when renovate's engines allow the next line.",
+      "matchDepNames": ["node"],
+      "allowedVersions": "<25"
+    },
+    {
+      "description": "renovate publishes several releases a day, and every pull request here needs a code owner's review. Take the validator weekly.",
+      "matchDepNames": ["renovate"],
+      "schedule": ["* 0-5 * * 1"]
+    }
+  ]
 }

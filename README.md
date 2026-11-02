@@ -57,8 +57,12 @@ A change here reaches every repository in the org on Renovate's next run, which
 is why the repo takes pull requests rather than pushes. CI validates every one:
 
 ```bash
-npx --package renovate renovate-config-validator --strict --no-global default.json
+npx --package renovate@44.202.1 renovate-config-validator --strict --no-global default.json
 ```
+
+Run it on Node 24 with the version CI pins in `.github/workflows/ci.yml`. On
+another Node line, npm installs whichever old renovate major still accepts it,
+and that validator fails on these arguments.
 
 `--no-global` reads the file as a shared preset rather than as self-hosted
 global configuration, which is what the other repos actually extend.
