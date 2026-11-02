@@ -3,9 +3,9 @@
   "extends": ["github>coo-quack/renovate-config"],
   "customManagers": [
     {
-      "description": "The renovate version CI's validator step installs with npx.",
+      "description": "The renovate version that CI's validator steps and the README's command install with npx.",
       "customType": "regex",
-      "managerFilePatterns": ["/^\\.github/workflows/ci\\.yml$/"],
+      "managerFilePatterns": ["/^\\.github/workflows/ci\\.yml$/", "/^README\\.md$/"],
       "matchStrings": ["--package renovate@(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
       "depNameTemplate": "renovate",
       "datasourceTemplate": "npm"
@@ -13,7 +13,7 @@
   ],
   "packageRules": [
     {
-      "description": "CI's Node stays inside the range renovate's engines declare (^24.11.0 for renovate 44). On a newer Node, npx installs an old renovate major whose validator fails, as the Node 26 update did. Raise this when renovate's engines allow the next line.",
+      "description": "CI's Node stays inside the range renovate's engines declare (^24.11.0 as of renovate 44). On a newer Node, npx installs an old renovate major whose validator fails, as the Node 26 update did. Raise this when renovate's engines allow the next line.",
       "matchDepNames": ["node"],
       "allowedVersions": "<25"
     },
