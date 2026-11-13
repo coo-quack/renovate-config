@@ -29,7 +29,7 @@ jobs:
       # (37.x on Node 26), and its validator stops with "File does not exist".
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '24.22.2'
+          node-version: '24.22.3'
 
       # --no-global reads the file as a shared preset rather than as
       # self-hosted global configuration, which is what the other repos
