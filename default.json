@@ -5,7 +5,6 @@
     "config:recommended",
     "helpers:pinGitHubActionDigests"
   ],
-  "dependencyDashboard": true,
   "osvVulnerabilityAlerts": true,
   "minimumReleaseAge": "1 day",
   "rangeStrategy": "pin",
