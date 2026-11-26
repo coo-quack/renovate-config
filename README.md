@@ -57,7 +57,7 @@ A change here reaches every repository in the org on Renovate's next run, which
 is why the repo takes pull requests rather than pushes. CI validates every one:
 
 ```bash
-npx --package renovate@44.251.0 renovate-config-validator --strict --no-global default.json
+npx --package renovate@44.262.1 renovate-config-validator --strict --no-global default.json
 ```
 
 Run it on the Node version and the renovate version that

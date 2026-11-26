@@ -40,7 +40,7 @@ jobs:
       # the next (its own dependencies still resolve at install); renovate.json
       # updates it.
       - name: Validate the preset
-        run: npx --yes --package renovate@44.251.0 renovate-config-validator --strict --no-global default.json
+        run: npx --yes --package renovate@44.262.1 renovate-config-validator --strict --no-global default.json
 
       - name: Validate this repository's own config
-        run: npx --yes --package renovate@44.251.0 renovate-config-validator --strict --no-global renovate.json
+        run: npx --yes --package renovate@44.262.1 renovate-config-validator --strict --no-global renovate.json
